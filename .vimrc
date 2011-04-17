@@ -41,3 +41,13 @@ set shortmess=a
 
 imap jj <Esc>j
 map <C-n> <Esc>:NERDTreeToggle<Return>
+
+function! SmartHome()
+  let s:col = col(".")
+  normal! ^
+  if s:col == col(".")
+    normal! 0
+  endif
+endfunction
+nnoremap <silent> <Home> :call SmartHome()<CR>
+inoremap <silent> <Home> <C-O>:call SmartHome()<CR>
