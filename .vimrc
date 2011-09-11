@@ -1,14 +1,15 @@
 set nocompatible
 syntax on
-colorscheme wombat
+"colorscheme wombat
+colorscheme desert
 filetype plugin indent on
 "set autoread
 
 set autochdir
 set backspace=indent,eol,start
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+"set backup
+"set backupdir=~/.vim/backup
+"set directory=~/.vim/tmp
 set fileformats=unix,dos,mac
 set hidden
 set mouse=a
@@ -40,7 +41,7 @@ set softtabstop=4
 set shortmess=a
 
 imap jj <Esc>j
-map <C-n> <Esc>:NERDTreeToggle<Return>
+"map <C-n> <Esc>:NERDTreeToggle<Return>
 
 function! SmartHome()
   let s:col = col(".")
