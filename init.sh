@@ -48,10 +48,10 @@ echo "DotFiles copied..."
 
 
 # Git
-git config --global user.name "$gitUserName" 
-git config --global user.email "$gitEmail" 
+git config --global user.name "Mazen A. Melibari" 
+git config --global user.email "mazen@mazen.ws" 
 
 git config --global core.autocrlf input
 git config --global core.safecrlf true
-git config --global core.editor "$gitEditor"
+git config --global core.editor "vim"
 echo "Git configured.."
