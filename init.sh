@@ -51,8 +51,8 @@ echo "DotFiles copied..."
 git config --global user.name "Mazen A. Melibari" 
 git config --global user.email "mazen@mazen.ws" 
 
-git config --global core.autocrlf input
-git config --global core.safecrlf true
+git config --global core.autocrlf true
+git config --global core.safecrlf false
 git config --global core.editor "vim"
 git config --global core.excludesfile ~/.gitignore
 echo "Git configured.."
