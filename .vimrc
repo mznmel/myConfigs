@@ -52,3 +52,7 @@ function! SmartHome()
 endfunction
 nnoremap <silent> <Home> :call SmartHome()<CR>
 inoremap <silent> <Home> <C-O>:call SmartHome()<CR>
+
+map <F6> :tabnext<CR>
+map <F7> :tabprev<CR>
+map <F8> :tabclose<CR>
