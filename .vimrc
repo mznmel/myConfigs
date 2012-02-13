@@ -6,7 +6,8 @@ filetype plugin indent on
 "set autoread
 
 "" GUI
-guioptions-=T  "remove toolbar
+set guioptions-=T  "remove toolbar
+set guifont=Consolas:h18:cANSI
 
 set autochdir
 set backspace=indent,eol,start
