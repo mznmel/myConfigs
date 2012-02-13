@@ -5,6 +5,9 @@ colorscheme desert
 filetype plugin indent on
 "set autoread
 
+"" GUI
+guioptions-=T  "remove toolbar
+
 set autochdir
 set backspace=indent,eol,start
 "set backup
