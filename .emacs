@@ -7,12 +7,25 @@
 
 ; gui
 (tool-bar-mode -1)
+(menu-bar-mode -1)
+(global-linum-mode t)
 (mouse-wheel-mode t)
+(setq visible-bell t) ;flash instead of beep
+(setq inhibit-startup-screen t)
+(setq make-backup-files nil)
+(load-theme 'wombat t)
 
 ; enable ido
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+; Tramp
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
+; OrgMode
+(setq org-replace-disputed-keys t)
 
 ; ibuffer
 (setq ibuffer-shrink-to-minimum-size t)
@@ -21,14 +34,6 @@
 (setq ibuffer-use-header-line t)
 (global-set-key [(f12)] 'ibuffer) ; map ibuffer to F12
 
-
-(setq visible-bell t) ;flash instead of beep
-(setq inhibit-startup-screen t)
-
-(load-theme 'wombat t)
-
-; Backup files
-(setq make-backup-files nil)
 
 ; expand-region
 (require 'expand-region)
@@ -57,6 +62,18 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
+;; scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time    
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling    
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse    
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
+; CUA
+(cua-mode t)
+(transient-mark-mode 1)
+(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
+
 (set-face-attribute 'default nil :family "Consolas" :height 160)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -72,9 +89,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time    
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling    
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse    
-(setq scroll-step 1) ;; keyboard scroll one line at a time
