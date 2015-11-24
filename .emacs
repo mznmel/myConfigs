@@ -1,66 +1,25 @@
-; Emacs package repository      
-(require 'package)      
-(add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))      
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(server-start)
+
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+
+;(package-refresh-contents) ;; Uncomment to update packages
 (package-initialize)
 
-; gui
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(global-linum-mode t)
-(mouse-wheel-mode t)
-(setq visible-bell t) ;flash instead of beep
-(setq inhibit-startup-screen t)
-(setq make-backup-files nil)
-(load-theme 'wombat t)
+;; Modern Emacs
+;; Mostly from: http://ergoemacs.org/emacs/emacs_make_modern.html
+(cua-mode t)
+(transient-mark-mode 1) ; Standard selection-highlighting behaviour
+(setq cua-keep-region-after-copy t) ; Standard Windows behaviour
+(setq visible-bell 1)
 
-; enable ido
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
-; Tramp
-(require 'tramp)
-(setq tramp-default-method "ssh")
-
-; OrgMode
-(setq org-replace-disputed-keys t)
-
-; ibuffer
-(setq ibuffer-shrink-to-minimum-size t)
-(setq ibuffer-always-show-last-buffer nil)
-(setq ibuffer-sorting-mode 'recency)
-(setq ibuffer-use-header-line t)
-(global-set-key [(f12)] 'ibuffer) ; map ibuffer to F12
-
-
-; expand-region
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-; evil
-(require 'evil)
-(evil-mode 0)
-
-; Auto-complete
-(require 'auto-complete)
-(add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(require 'auto-complete-config)
-(ac-config-default)
-
-
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(electric-pair-mode 1) ;; auto-insert/close bracket pairs
+(global-linum-mode 1) ;; line numbers
+(column-number-mode 1) ;; cursor's column position
+(setq make-backup-files nil) ;; stop creating backup~ files
+(setq auto-save-default nil) ;; stop creating #autosave# files
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time    
@@ -68,24 +27,69 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse    
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+;; keep a list of recently opened files
+;; call recentf-open-files to list and open recently opened file
+(recentf-mode 1)
 
-; CUA
-(cua-mode t)
-(transient-mark-mode 1)
-(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
+;; gui
+(tool-bar-mode -1)
+(menu-bar-mode 1)
+(global-hl-line-mode 1) ; highlight current line
 
-(set-face-attribute 'default nil :family "Consolas" :height 160)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
- '(custom-enabled-themes (quote (deeper-blue)))
- '(inhibit-startup-screen t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; theme
+(package-install 'color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-eighties t)
+
+;; font
+(set-face-attribute 'default nil :family "Consolas" :height 140)
+
+;; keep a list of recently opened files
+;; call recentf-open-files to list and open recently opened file
+(recentf-mode 1)
+
+;; enable ido
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-use-filename-at-point 'guess) 
+(setq ido-file-extensions-order '(".org" ".txt" ".py" ".rb" ".html"))
+(ido-mode 1)
+
+;; icomplete
+;; shows minibuffer completion preview
+(icomplete-mode 99)
+
+;; Smart-Mode-Line
+;; better mode-line, for example it better highlights the active window bar!
+(package-install 'smart-mode-line)
+(sml/setup)
+(sml/apply-theme 'dark)
+(add-to-list 'sml/replacer-regexp-list '("^c:/Users/mkhDev/Dropbox/" "DropBox/") t)
+
+;; expand-region
+(package-install 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+; Auto-complete
+(package-install 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; Web-mode
+(package-install 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(package-install 'evil)
+(evil-mode 1)
+(define-key evil-ex-map "e " 'ido-find-file)
+(define-key evil-ex-map "w " 'ido-write-file)
+(define-key evil-ex-map "b " 'ido-switch-buffer)
+
+(setq js-indent-level 2)
+
+;; OrgMode
+;(setq org-replace-disputed-keys t)
+(package-install 'org-plus-contrib)
+(require 'cl) ; a fix for a bug in org-drill!
+(require 'org)
+(require 'org-drill)
