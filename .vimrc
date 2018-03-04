@@ -1,13 +1,14 @@
 call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'vimwiki/vimwiki'
 Plug 'scrooloose/nerdtree'
 call plug#end()
 
-set nocompatible
+set background=dark
+colorscheme solarized
+
 syntax on
-"colorscheme wombat
-colorscheme desert
 filetype plugin indent on
-"set autoread
 
 "" GUI
 set guioptions-=m  "remove toolbar
@@ -16,9 +17,6 @@ set guifont=Consolas:h18:cANSI
 
 set autochdir
 set backspace=indent,eol,start
-"set backup
-"set backupdir=~/.vim/backup
-"set directory=~/.vim/tmp
 set fileformats=unix,dos,mac
 set hidden
 set mouse=a
@@ -65,4 +63,3 @@ inoremap <silent> <Home> <C-O>:call SmartHome()<CR>
 map <F6> :tabnext<CR>
 map <F7> :tabprev<CR>
 map <F8> :tabclose<CR>
-
