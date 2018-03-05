@@ -61,3 +61,5 @@ inoremap <silent> <Home> <C-O>:call SmartHome()<CR>
 map <F6> :tabnext<CR>
 map <F7> :tabprev<CR>
 map <F8> :tabclose<CR>
+
+let g:vimwiki_list = [{'path': '[[[[NotesFolder]]]]'}]
